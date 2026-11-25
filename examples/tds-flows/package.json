@@ -1,0 +1,22 @@
+{
+    "name": "tds-flows",
+    "private": true,
+    "version": "5.10.0",
+    "description": "TABLE AI flow atlas: a city's trusted-data-space deals within districts, across the city, to other cities and abroad, in seven Perspective views.",
+    "scripts": {
+        "build": "node build.js",
+        "start": "node build.js && http-server dist"
+    },
+    "keywords": [],
+    "license": "Apache-2.0",
+    "dependencies": {
+        "@perspective-dev/client": "workspace:^",
+        "@perspective-dev/viewer": "workspace:^",
+        "@perspective-dev/viewer-charts": "workspace:^",
+        "@perspective-dev/viewer-datagrid": "workspace:^"
+    },
+    "devDependencies": {
+        "esbuild": "catalog:",
+        "http-server": "catalog:"
+    }
+}

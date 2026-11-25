@@ -1,0 +1,375 @@
+{
+ "city": "zhuhai",
+ "year": 2030,
+ "unit": "亿元/年",
+ "note": "inter_city / hk_macao / overseas rows are illustrative (status mock); in-city rows come from the TABLE AI entity model",
+ "views": [
+  {
+   "id": "corridors",
+   "title": {
+    "zh": "通道明细",
+    "en": "Corridors"
+   },
+   "note": {
+    "zh": "按范围与对方分组，按渠道拆列：价值、笔数、平均距离",
+    "en": "Grouped by scope and counterpart, split by channel: value, deals, mean distance"
+   },
+   "plugin": "Datagrid",
+   "time": "snapshot",
+   "config": {
+    "plugin": "Datagrid",
+    "group_by": [
+     "scope",
+     "to"
+    ],
+    "split_by": [
+     "channel"
+    ],
+    "columns": [
+     "value",
+     "deals",
+     "km"
+    ],
+    "aggregates": {
+     "value": "sum",
+     "deals": "sum",
+     "km": "avg"
+    },
+    "sort": [
+     [
+      "value",
+      "desc"
+     ]
+    ],
+    "filter": [
+     [
+      "quarter",
+      "==",
+      "2030Q1"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "share",
+   "title": {
+    "zh": "价值去向",
+    "en": "Where value goes"
+   },
+   "note": {
+    "zh": "面积 = 交易价值，按范围再按对方",
+    "en": "Area = deal value, by scope then counterpart"
+   },
+   "plugin": "Treemap",
+   "time": "snapshot",
+   "config": {
+    "plugin": "Treemap",
+    "group_by": [
+     "scope",
+     "to"
+    ],
+    "columns": [
+     "value",
+     "deals"
+    ],
+    "aggregates": {
+     "value": "sum",
+     "deals": "sum"
+    },
+    "sort": [
+     [
+      "value",
+      "desc"
+     ]
+    ],
+    "filter": [
+     [
+      "quarter",
+      "==",
+      "2030Q1"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "what",
+   "title": {
+    "zh": "流通什么",
+    "en": "What flows"
+   },
+   "note": {
+    "zh": "内圈范围 → 流通对象 → 提供方行业",
+    "en": "Inner ring scope → artefact → provider sector"
+   },
+   "plugin": "Sunburst",
+   "time": "snapshot",
+   "config": {
+    "plugin": "Sunburst",
+    "group_by": [
+     "scope",
+     "artifact",
+     "from_sector"
+    ],
+    "columns": [
+     "value"
+    ],
+    "aggregates": {
+     "value": "sum"
+    },
+    "sort": [
+     [
+      "value",
+      "desc"
+     ]
+    ],
+    "filter": [
+     [
+      "quarter",
+      "==",
+      "2030Q1"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "od",
+   "title": {
+    "zh": "起讫矩阵",
+    "en": "Origin–destination"
+   },
+   "note": {
+    "zh": "行 = 提供方所在区，列 = 对方（区或城市）",
+    "en": "Rows = provider's district, columns = counterpart (district or city)"
+   },
+   "plugin": "Heatmap",
+   "time": "snapshot",
+   "config": {
+    "plugin": "Heatmap",
+    "group_by": [
+     "from"
+    ],
+    "split_by": [
+     "to"
+    ],
+    "columns": [
+     "value"
+    ],
+    "aggregates": {
+     "value": "sum"
+    },
+    "filter": [
+     [
+      "quarter",
+      "==",
+      "2030Q1"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "growth",
+   "title": {
+    "zh": "按季度的流通价值",
+    "en": "Value by quarter"
+   },
+   "note": {
+    "zh": "按范围堆叠，年化，亿元",
+    "en": "Stacked by scope, annualised, 100m yuan"
+   },
+   "plugin": "Y Bar",
+   "time": "series",
+   "config": {
+    "plugin": "Y Bar",
+    "group_by": [
+     "quarter"
+    ],
+    "split_by": [
+     "scope"
+    ],
+    "columns": [
+     "value"
+    ],
+    "aggregates": {
+     "value": "sum"
+    },
+    "sort": [
+     [
+      "quarter",
+      "asc"
+     ]
+    ],
+    "filter": [
+     [
+      "t",
+      "<=",
+      2030.000001
+     ]
+    ]
+   }
+  },
+  {
+   "id": "paths",
+   "title": {
+    "zh": "出境走哪条路径",
+    "en": "Cross-border paths"
+   },
+   "note": {
+    "zh": "只看港澳与境外，按合规路径",
+    "en": "Hong Kong, Macao and abroad only, by compliance path"
+   },
+   "plugin": "Y Line",
+   "time": "series",
+   "config": {
+    "plugin": "Y Line",
+    "group_by": [
+     "quarter"
+    ],
+    "split_by": [
+     "path"
+    ],
+    "columns": [
+     "value"
+    ],
+    "aggregates": {
+     "value": "sum"
+    },
+    "filter": [
+     [
+      "scope",
+      "in",
+      [
+       "hk_macao",
+       "overseas"
+      ]
+     ],
+     [
+      "t",
+      "<=",
+      2030.000001
+     ]
+    ],
+    "sort": [
+     [
+      "quarter",
+      "asc"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "reach",
+   "title": {
+    "zh": "距离与价值",
+    "en": "Distance and value"
+   },
+   "note": {
+    "zh": "每个点是一个对方：横轴距离（对数），纵轴价值（对数）",
+    "en": "Each dot is a counterpart: distance (log) across, value (log) up"
+   },
+   "plugin": "X/Y Scatter",
+   "time": "snapshot",
+   "config": {
+    "plugin": "X/Y Scatter",
+    "group_by": [
+     "to"
+    ],
+    "split_by": [
+     "scope"
+    ],
+    "columns": [
+     "km",
+     "value"
+    ],
+    "aggregates": {
+     "km": "avg",
+     "value": "sum"
+    },
+    "filter": [
+     [
+      "quarter",
+      "==",
+      "2030Q1"
+     ]
+    ]
+   }
+  }
+ ],
+ "codes": {
+  "flow_scope": {
+   "zh": {
+    "intra_district": "区内",
+    "inter_district": "城内跨区",
+    "inter_city": "城际（境内）",
+    "hk_macao": "港澳",
+    "overseas": "境外"
+   },
+   "en": {
+    "intra_district": "Within a district",
+    "inter_district": "Across districts",
+    "inter_city": "Other cities (domestic)",
+    "hk_macao": "Hong Kong and Macao",
+    "overseas": "Overseas"
+   }
+  },
+  "xborder_path": {
+   "zh": {
+    "domestic": "不出境",
+    "exempt": "豁免申报",
+    "standard_contract": "标准合同",
+    "certification": "保护认证",
+    "security_assessment": "安全评估"
+   },
+   "en": {
+    "domestic": "Stays in China",
+    "exempt": "Exempt",
+    "standard_contract": "Standard contract",
+    "certification": "Certification",
+    "security_assessment": "Security assessment"
+   }
+  },
+  "artifact": {
+   "zh": {
+    "data_product": "数据产品",
+    "dataset": "高质量数据集",
+    "usage_policy": "使用策略",
+    "verifiable_credential": "可验证凭证",
+    "vertical_model": "AI 垂直模型"
+   },
+   "en": {
+    "data_product": "Data product",
+    "dataset": "High-quality dataset",
+    "usage_policy": "Usage policy",
+    "verifiable_credential": "Verifiable credential",
+    "vertical_model": "Vertical AI model"
+   }
+  },
+  "sector": {
+   "zh": {
+    "gov": "公共数据",
+    "fin": "金融",
+    "info": "信息软件",
+    "mfg": "工业制造",
+    "trade": "批发零售",
+    "log": "交通物流",
+    "biz": "商务服务",
+    "estate": "城建不动产",
+    "health": "医疗健康",
+    "agri": "农业",
+    "rnd": "高校科研"
+   },
+   "en": {
+    "gov": "Public data",
+    "fin": "Finance",
+    "info": "Information and software",
+    "mfg": "Manufacturing",
+    "trade": "Wholesale and retail",
+    "log": "Transport and logistics",
+    "biz": "Business services",
+    "estate": "Real estate and construction",
+    "health": "Health",
+    "agri": "Agriculture",
+    "rnd": "Universities and research"
+   }
+  }
+ }
+}

@@ -1,0 +1,62 @@
+/* TABLE AI design system on Perspective's Pro Light theme: white ground, Universe Deep Blue #0A1626 structure,
+ * Sundial Gold #A88B52 as the one accent, square hairline cards, Manrope + Noto Sans SC. No gradients in the UI;
+ * the heatmap scale runs white → gold → deep blue. Series colours follow the alphabetical order Perspective gives
+ * the flow scopes: hk_macao, inter_city, inter_district, intra_district, overseas. */
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;600&display=swap");
+
+:root { --ink: #0a1626; --gold: #a88b52; --line: #c5c6cd; --muted: #44474c; --subtle: #75777d }
+* { box-sizing: border-box }
+body { margin: 0; background: #fff; color: #1b1b1d; font: 15px/1.6 Manrope, "Noto Sans SC", system-ui, sans-serif }
+header { max-width: 1320px; margin: 0 auto; padding: 28px 24px 12px; border-bottom: 1px solid var(--ink) }
+.brand { font-size: 12px; letter-spacing: .18em; font-weight: 600; color: var(--ink) }
+h1 { font-weight: 300; font-size: clamp(24px, 3vw, 36px); color: var(--ink); margin: 6px 0 4px; letter-spacing: -.01em }
+#dek { margin: 0; color: var(--muted); font-size: 13px; max-width: 70em }
+.bar { display: flex; gap: 16px; align-items: center; justify-content: space-between; margin-top: 12px; font-size: 13px }
+.bar label { display: flex; gap: 10px; align-items: center }
+.bar input { accent-color: var(--gold); width: min(420px, 50vw) }
+.bar output { color: var(--ink); font-variant-numeric: tabular-nums; min-width: 5em }
+#lang { border: 1px solid var(--ink); background: #fff; color: var(--ink); padding: 4px 12px; cursor: pointer; font: inherit }
+main { max-width: 1320px; margin: 16px auto 40px; padding: 0 24px; display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); grid-template-columns: 1fr }
+@media (min-width: 900px) { main { grid-template-columns: repeat(2, minmax(0, 1fr)) } .card.wide { grid-column: 1 / -1 } }
+.card { background: #fff; padding: 14px 16px 16px; display: grid; gap: 6px; align-content: start }
+.card .h { display: flex; justify-content: space-between; align-items: baseline; gap: 10px }
+.card h2 { margin: 0; font-size: 15px; font-weight: 600; color: var(--ink) }
+.card p { margin: 0; font-size: 12px; color: var(--subtle) }
+.plug { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: #785f2a; border: 1px solid var(--gold); padding: 1px 6px }
+perspective-viewer { height: 380px; width: 100%; border: 0; font-family: Manrope, "Noto Sans SC", system-ui, sans-serif }
+.card.wide perspective-viewer { height: 440px }
+
+perspective-viewer[theme="Pro Light"] {
+    --psp--background-color: #ffffff;
+    --psp--color: #0a1626;
+    --psp-active--color: #a88b52;
+    --psp-charts--gridline--color: #e3e3e8;
+    --psp-charts--axis-ticks--color: #44474c;
+    --psp-charts--axis-lines--color: #c5c6cd;
+    --psp-charts--legend--color: #44474c;
+    --psp-charts--series--color: #0a1626;
+    --psp-charts--series-1--color: #c9b48a;
+    --psp-charts--series-2--color: #0a1626;
+    --psp-charts--series-3--color: #6c7380;
+    --psp-charts--series-4--color: #c5c6cd;
+    --psp-charts--series-5--color: #a88b52;
+    --psp-charts--series-6--color: #44474c;
+    --psp-charts--series-7--color: #e3c284;
+    --psp-charts--series-8--color: #9aa1ad;
+    --psp-charts--series-9--color: #785f2a;
+    --psp-charts--series-10--color: #1d2b3f;
+    --psp-datagrid--series-1--color: #c9b48a;
+    --psp-datagrid--series-2--color: #0a1626;
+    --psp-datagrid--series-3--color: #6c7380;
+    --psp-datagrid--series-4--color: #c5c6cd;
+    --psp-datagrid--series-5--color: #a88b52;
+    --psp-datagrid--pos-cell--color: #0a1626;
+    --psp-datagrid--neg-cell--color: #8a5a12;
+    --psp-charts--gradient-stop-1--color: #0a1626;
+    --psp-charts--gradient-stop-2--color: #a88b52;
+    --psp-charts--gradient-stop-3--color: #e9dfc9;
+    --psp-charts--gradient-stop-4--color: #ffffff;
+    --psp-charts--gradient-stop-5--color: #e9dfc9;
+    --psp-charts--gradient-stop-6--color: #a88b52;
+    --psp-charts--gradient-stop-7--color: #0a1626;
+}

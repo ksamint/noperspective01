@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>TABLE AI · 流通全景 Flow atlas · Perspective</title>
+        <link rel="preload" href="perspective-viewer.wasm" as="fetch" type="application/wasm" crossorigin="anonymous" />
+        <link rel="preload" href="perspective-server.wasm" as="fetch" type="application/wasm" crossorigin="anonymous" />
+        <script type="module" src="index.js"></script>
+        <link rel="stylesheet" href="index.css" />
+    </head>
+    <body>
+        <header>
+            <div class="brand">TABLE AI</div>
+            <h1 id="title"></h1>
+            <p id="dek"></p>
+            <div class="bar">
+                <label><span id="qlabel"></span> <output id="qout"></output><input id="q" type="range" min="0" max="0" step="1" /></label>
+                <button id="lang" type="button">EN</button>
+            </div>
+        </header>
+        <main id="grid"></main>
+    </body>
+</html>
